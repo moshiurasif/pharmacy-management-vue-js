@@ -84,8 +84,10 @@ export default {
       this.loggedIn = true;
       axios.post('http://127.0.0.1:8000/api/login', this.formData)
   .then(res=>{
-    console.log(res.data.message);
+    console.log(res.data.data.token);
     this.$toast.success(res.data.message)
+    localStorage.setItem("accessToken",res.data.data.token)
+    this.$router.push('/dashboard')
   })
   .catch(err=>{
     let errorMessage = "Something went wrong";
